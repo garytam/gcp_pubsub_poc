@@ -38,7 +38,7 @@ public class MessageListener {
                     System.out.printf("Data: " + message.getData().toStringUtf8() + "\n");
                     Map mapData = message.getAttributesMap();
                     mapData.keySet().forEach( key -> {
-                        System.out.printf("[ key =" + key + " value=" + mapData.get(key) + "]\n");
+                        System.out.printf("[ " + key + " =" + mapData.get(key) + "]\n");
                     });
                     consumer.ack();
                 };
@@ -54,7 +54,7 @@ public class MessageListener {
                 System.out.printf("Listening for messages on %s:\n", subscriptionName.toString());
                 // Allow the subscriber to run for 30s unless an unrecoverable error occurs.
                 subscriber.awaitTerminated(30, TimeUnit.MINUTES);
-            } catch (TimeoutException timeoutException) {
+            } catch (Exception exception) {
                 // Shut down the subscriber after 30s. Stop receiving messages.
                 subscriber.stopAsync();
                 //restart the subscriber again
